@@ -28,13 +28,13 @@ public class Move : MonoBehaviour
         turn.x += Input.GetAxis("Mouse X");
         turn.y += Input.GetAxis("Mouse Y");
         transform.localRotation = Quaternion.Euler((-turn.y * 5), ( turn.x * 5), 0);
-        /*
-        if(Input.GetKeyDown == u)
-        {
-            zoom += (float) u;
-            camera.velocity = new Vector3(camera.velocity.x, 0, camera.velocity.y);
-        }
-        */
+
+        
+        if(Input.GetKey(KeyCode.Z))
+            camera.velocity = new Vector3(camera.velocity.x, 40, camera.velocity.y);
+
+        if (Input.GetKey(KeyCode.X))
+            camera.velocity = new Vector3(camera.velocity.x, -40, camera.velocity.y);
 
     }
 }
