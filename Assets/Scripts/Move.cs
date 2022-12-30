@@ -8,9 +8,6 @@ public class Move : MonoBehaviour
     private Rigidbody myCamera;
     private Vector2 move;
     private Vector2 turn;
-    //private float zoom;
-    //private Vector3 deltamove;
-    //private float sensetivity;
     
 
     void Start()
