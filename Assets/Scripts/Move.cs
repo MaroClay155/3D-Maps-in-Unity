@@ -14,7 +14,7 @@ public class Move : MonoBehaviour
     //private float field_of_view = 60f;//normal
     private float mouseScrollWheel;
     //private Vector2 move;
-
+    private bool click, clickflag = false;
     void Start()
     {
 
@@ -22,6 +22,7 @@ public class Move : MonoBehaviour
         //CameraMovement();
         cameraobject = GetComponent<Rigidbody>();
         //Cursor.lockState = CursorLockMode.Locked;//hide cursor
+        
     }
     private void FixedUpdate()
     {
@@ -30,14 +31,15 @@ public class Move : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
         MyInput();
-        mouseScrollWheel = Input.GetAxis("Mouse ScrollWheel");
-        
+        if (clickflag)
+        {
+            turn.x += Input.GetAxis("Mouse X");
+            turn.y += Input.GetAxis("Mouse Y");
+            transform.localRotation = Quaternion.Euler((-turn.y * 3), (turn.x * 3), 0);
+        }
         //myCamera.velocity = new Vector3((40 * move.x), 0, (40 * move.y));
-        transform.localRotation = Quaternion.Euler((-turn.y * 3), ( turn.x * 3), 0);
-
-
+       
         //if (Input.GetKey(KeyCode.Z))
         //{ field_of_view -= 20f; }
         //if (Input.GetKey(KeyCode.X))
@@ -63,9 +65,14 @@ public class Move : MonoBehaviour
     {
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
-        turn.x += Input.GetAxis("Mouse X");
-        turn.y += Input.GetAxis("Mouse Y");
-        
+        mouseScrollWheel = Input.GetAxis("Mouse ScrollWheel");
+        click = Input.GetMouseButtonDown(0);
+        if(click)
+        { 
+            if (clickflag)
+            { clickflag = false; }
+            else clickflag = true;
+        }
     }
     void CameraMovement()
     {
@@ -73,4 +80,6 @@ public class Move : MonoBehaviour
         //cameraobject.AddForce(moveDirection.normalized * 40f, ForceMode.Force);
         cameraobject.velocity = moveDirection * 50;
     }
+
+    
 }
