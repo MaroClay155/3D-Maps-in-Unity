@@ -30,7 +30,10 @@ public class Move : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         MyInput();
+        mouseScrollWheel = Input.GetAxis("Mouse ScrollWheel");
+        
         //myCamera.velocity = new Vector3((40 * move.x), 0, (40 * move.y));
         transform.localRotation = Quaternion.Euler((-turn.y * 3), ( turn.x * 3), 0);
 
@@ -41,14 +44,14 @@ public class Move : MonoBehaviour
         //{ field_of_view += 20f; }
         //GetComponent<Camera>().fieldOfView = Mathf.Lerp(GetComponent<Camera>().fieldOfView, field_of_view, Time.deltaTime * 5);
 
-        if(mouseScrollWheel > 0)
+        if(mouseScrollWheel > 0 && transform.position.y >= 16)
         {
             //GetComponent<Camera>().fieldOfView--;
             GetComponent<Transform>().position = new Vector3(transform.position.x, transform.position.y - 8.0f, transform.position.z);
             //transform.Rotate(-1,0,0);        
         }
 
-        if (mouseScrollWheel < 0)
+        if (mouseScrollWheel < 0 )
         {
             //GetComponent<Camera>().fieldOfView++;
             GetComponent<Transform>().position = new Vector3(transform.position.x, transform.position.y + 8.0f, transform.position.z);
@@ -62,7 +65,7 @@ public class Move : MonoBehaviour
         verticalInput = Input.GetAxis("Vertical");
         turn.x += Input.GetAxis("Mouse X");
         turn.y += Input.GetAxis("Mouse Y");
-        mouseScrollWheel = Input.GetAxis("Mouse ScrollWheel");
+        
     }
     void CameraMovement()
     {
