@@ -17,7 +17,6 @@ public class Move : MonoBehaviour
     private bool click, clickflag = false;
     void Start()
     {
-
         //MyInput();
         //CameraMovement();
         cameraobject = GetComponent<Rigidbody>();
