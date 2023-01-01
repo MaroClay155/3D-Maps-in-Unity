@@ -28,11 +28,9 @@ public class publicSinwave : MonoBehaviour
             0x00, 0x00, 0x00, 0xff, 0xe6, 0x40, 0x01, 0x2c, 0x00, 0xff, 0x00, 0xaa, 0xdb, 0x41, 0xff, 0xff,
             0x00, 0x00, 0x00, 0xff, 0xe8, 0x40, 0x01, 0x1c, 0x00, 0xff, 0x00, 0xaa, 0xbb, 0x40, 0xff, 0xff,
         };
-        // Load data into the texture and upload it to the GPU.
         tex.LoadRawTextureData(pvrtcBytes);
         tex.Apply();
-        // Assign texture to renderer's material.
-        //GetComponent<Renderer>().material.mainTexture = tex; // works for a 3D-Object
+        image = GetComponent<RawImage>();
         image.material.mainTexture = tex; // works for Raw Image
     }
 }
