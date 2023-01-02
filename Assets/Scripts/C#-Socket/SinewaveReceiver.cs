@@ -13,8 +13,6 @@ public class sinwaveReceiver : MonoBehaviour
     static Socket listener;
     private CancellationTokenSource source;
     public ManualResetEvent allDone;
-   
-    private Color matColor;////////////old//////
     private byte[] ImageBytesArray;
     private RawImage image;
     private Texture2D tex;
@@ -45,9 +43,9 @@ public class sinwaveReceiver : MonoBehaviour
 
         image = GetComponent<RawImage>();
         tex = new Texture2D(16, 16, TextureFormat.PVRTC_RGBA4, false);
-        tex.LoadRawTextureData(ImageBytesArray);///image byte array
         //tex.LoadRawTextureData(testarray);/// test byte array
-        tex.Apply();
+        
+        image.material.mainTexture = tex;
         await Task.Run(() => ListenEvents(source.Token));
         
     }
@@ -129,7 +127,7 @@ public class sinwaveReceiver : MonoBehaviour
             if (img1.imagestring.Length > 1)
             {
                 //string content = img1.imagestring.ToString();/////oldzzz
-                //print($"Read {content.Length} bytes from socket.\n Data : {content}");
+                print($"Read {img1.imagestring.Length} bytes from socket.\n Data : {img1.imagestring}");
                 //SetColors(content);//////////old/////////////
                 ///setImage(content);/////////////new/////////////oldzzz
                 setImage(img1.imagestring);////newzzz
@@ -155,8 +153,18 @@ public class sinwaveReceiver : MonoBehaviour
     
     private void setImage (string data)
     {
-        //string[] imagedata = data.Split(',');
-        ImageBytesArray = Encoding.ASCII.GetBytes(data);
+        
+        ImageBytesArray = Encoding.ASCII.GetBytes(data);////////besoold
+        //ImageBytesArray = data.Select(x => Convert.ToByte(x)).ToArray();
+        // string y = "";
+        // foreach(var i in ImageBytesArray) {
+        //     y+=i+",";
+        // }
+        // Debug.Log("ImageBytesArray: "+ y);
+        // Debug.Log("split");
+        // Debug.Log("string Data: "+ data);
+        tex.LoadRawTextureData(ImageBytesArray);///image byte array
+        tex.Apply();
     }
     
     
