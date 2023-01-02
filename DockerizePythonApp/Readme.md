@@ -1,4 +1,3 @@
-#
 ## step1: Build an Image for the python application
 
 ```
