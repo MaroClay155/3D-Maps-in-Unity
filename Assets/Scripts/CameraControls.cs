@@ -58,6 +58,7 @@ public class CameraControls : MonoBehaviour
             GetComponent<Transform>().position = new Vector3(transform.position.x, transform.position.y + 8.0f, transform.position.z);
             //transform.Rotate(1, 0, 0);
         }
+
     }
 
     void MyInput()

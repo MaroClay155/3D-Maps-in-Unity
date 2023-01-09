@@ -13,14 +13,9 @@ public class PythonRandomColor : MonoBehaviour
     static Socket listener;
     private CancellationTokenSource source;
     public ManualResetEvent allDone;
-    private Renderer cube;/////////old//////////
+    //private Renderer cube;/////////old//////////
     private RawImage image;
-    //private SpriteRenderer spriteRenderer;///////new1//////
-    private Color matColor;////////////old//////
-    //private Sprite image_sprite;////////new1///////////
-    //public Renderer Image_Renderer;/////new2////
-    //private Texture2D image_tex;/////new2////
-
+    private Color matColor;
     public static readonly int PORT = 1755;
     public static readonly int WAITTIME = 1;
 
@@ -34,7 +29,7 @@ public class PythonRandomColor : MonoBehaviour
     // Start is called before the first frame update
     async void Start()
     {
-        cube = GetComponent<Renderer>();////////////old////////////////
+        //cube = GetComponent<Renderer>();
         image = GetComponent<RawImage>();
 
         await Task.Run(() => ListenEvents(source.Token));
@@ -44,7 +39,7 @@ public class PythonRandomColor : MonoBehaviour
     void Update()
     {
         image.color = matColor;
-        //cube.material.color = matColor;///////////////////new3/////////
+        //cube.material.color = matColor;//////////////////
     }
 
     private void ListenEvents(CancellationToken token)
@@ -119,8 +114,7 @@ public class PythonRandomColor : MonoBehaviour
             {
                 string content = state.colorCode.ToString();
                 print($"Read {content.Length} bytes from socket.\n Data : {content}");
-                SetColors(content);//////////old/////////////
-                //setImage(content);/////////////new/////////////
+                SetColors(content);
             }
             handler.Close();
         }
